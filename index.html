@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EMON Vai App — Download</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{width:100%;max-width:460px;background:#1e293b;border-radius:22px;padding:28px;box-shadow:0 20px 50px #0008;text-align:center}
+    h1{margin:0 0 8px;font-size:28px}
+    .sub{color:#cbd5e1;margin-bottom:24px}
+    .step{background:#0f172a;border-radius:16px;padding:18px;margin:14px 0;text-align:left}
+    .step h2{font-size:18px;margin:0 0 12px}
+    input{width:100%;padding:13px;border:0;border-radius:10px;font-size:16px;outline:none}
+    button,.social{display:block;width:100%;border:0;border-radius:10px;padding:13px;margin-top:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center}
+    .main{background:#22c55e;color:#062b12}
+    .fb{background:#1877f2;color:#fff}
+    .tt{background:#fff;color:#111}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    .ok{color:#86efac;font-weight:700;margin-top:8px}
+    .err{color:#fca5a5;font-weight:700;margin-top:8px}
+    #downloadArea{display:none}
+    .small{font-size:12px;color:#94a3b8;margin-top:18px;line-height:1.5}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>EMON Vai App</h1>
+    <div class="sub">অ্যাপ ডাউনলোড করতে নিচের ধাপগুলো সম্পন্ন করুন</div>
+
+    <section class="step">
+      <h2>১. Password দিন</h2>
+      <input id="password" type="password" placeholder="Password">
+      <button class="main" onclick="checkPassword()">Continue</button>
+      <div id="passwordMsg"></div>
+    </section>
+
+    <section class="step" id="socialStep" style="display:none">
+      <h2>২. Social Media Follow</h2>
+      <a class="social fb" href="https://www.facebook.com/share/14pND6q9QC9/" target="_blank" rel="noopener" onclick="markFollow('fb')">Facebook Follow</a>
+      <a class="social tt" href="https://www.tiktok.com/@ffidsaler1587?_r=1&_t=ZS-9AGtt2JAcJ2" target="_blank" rel="noopener" onclick="markFollow('tt')">TikTok Follow</a>
+      <div id="followMsg" class="small">Facebook ও TikTok দুটির Follow পেজে যাওয়ার পর Download চালু হবে।</div>
+    </section>
+
+    <section class="step" id="downloadArea">
+      <h2>৩. Download</h2>
+      <a id="downloadBtn" class="social main" href="emon-vai-app.apk" download>⬇ Download APK</a>
+      <div class="ok">সব ধাপ সম্পন্ন হয়েছে।</div>
+    </section>
+
+    <div class="small">নোট: ওয়েবসাইট থেকে সত্যিকার Follow করা হয়েছে কি না Facebook/TikTok-এর API ছাড়া নিশ্চিতভাবে যাচাই করা যায় না। এখানে Follow button চাপার পর পরবর্তী ধাপ চালু হয়।</div>
+  </main>
+
+<script>
+  const PASSWORD = "emonvai1587";
+  let fb = false, tt = false;
+
+  function checkPassword(){
+    const msg = document.getElementById("passwordMsg");
+    if(document.getElementById("password").value === PASSWORD){
+      msg.className = "ok";
+      msg.textContent = "Password ঠিক আছে।";
+      document.getElementById("socialStep").style.display = "block";
+    } else {
+      msg.className = "err";
+      msg.textContent = "Password ভুল।";
+    }
+  }
+
+  function markFollow(type){
+    if(type === "fb") fb = true;
+    if(type === "tt") tt = true;
+    if(fb && tt){
+      document.getElementById("downloadArea").style.display = "block";
+      document.getElementById("followMsg").textContent = "দুটি ধাপ সম্পন্ন হয়েছে। এখন Download করুন।";
+      document.getElementById("followMsg").className = "ok";
+    }
+  }
+</script>
+</body>
+</html>
